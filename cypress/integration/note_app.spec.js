@@ -10,6 +10,19 @@ describe('Note app', function () {
     cy.visit('http://localhost:3000');
   });
 
+  it.only('login fails with wrong password', function () {
+    cy.contains('log in').click();
+    cy.get('#username').type('gpapagapitos');
+    cy.get('#password').type('wrong');
+    cy.get('#login-button').click();
+
+    cy.get('.error').should('contain', 'wrong credentials')
+      .and('have.css', 'color', 'rgb(255, 0, 0)')
+      .and('have.css', 'border-style', 'solid');
+
+    cy.get('html').should('not.contain', 'George Papagapitos logged in');
+  });
+
   it('front page can be opened', function () {
     cy.contains('Notes');
     cy.contains('Note app, A Human Company 2021');
