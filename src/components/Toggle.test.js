@@ -8,8 +8,8 @@ describe('<Toggle />', () => {
 
   beforeEach(() => {
     component = render(
-      <Toggle buttonLabel='show...'>
-        <div className='testDiv' />
+      <Toggle buttonLabel="show...">
+        <div className="testDiv" />
       </Toggle>
     );
   });
@@ -22,6 +22,7 @@ describe('<Toggle />', () => {
 
   test('at start the children are not displayed', () => {
     const div = component.container.querySelector('.toggleContent');
+
     expect(div).toHaveStyle('display: none');
   });
 
@@ -34,7 +35,7 @@ describe('<Toggle />', () => {
   });
 
   test('toggled content can be closed', () => {
-    const button = component.container.querySelector('button');
+    const button = component.getByText('show...');
     fireEvent.click(button);
 
     const closeButton = component.getByText('cancel');
@@ -43,4 +44,5 @@ describe('<Toggle />', () => {
     const div = component.container.querySelector('.toggleContent');
     expect(div).toHaveStyle('display: none');
   });
+
 });

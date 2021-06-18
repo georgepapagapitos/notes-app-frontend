@@ -1,7 +1,7 @@
-import React, { useState, useImperativeHandle, forwardRef } from 'react';
+import React, { useState, useImperativeHandle } from 'react';
 import PropTypes from 'prop-types';
 
-const Toggle = forwardRef((props, ref) => {
+const Toggle = React.forwardRef((props, ref) => {
   const [visible, setVisible] = useState(false);
 
   const hideWhenVisible = { display: visible ? 'none' : '' };
@@ -22,7 +22,7 @@ const Toggle = forwardRef((props, ref) => {
       <div style={hideWhenVisible}>
         <button onClick={toggleVisibility}>{props.buttonLabel}</button>
       </div>
-      <div style={showWhenVisible} className='toggleContent'>
+      <div style={showWhenVisible} className="toggleContent">
         {props.children}
         <button onClick={toggleVisibility}>cancel</button>
       </div>
