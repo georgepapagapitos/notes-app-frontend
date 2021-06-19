@@ -10,7 +10,7 @@ describe('Note app', function () {
     cy.visit('http://localhost:3000');
   });
 
-  it.only('login fails with wrong password', function () {
+  it('login fails with wrong password', function () {
     cy.contains('log in').click();
     cy.get('#username').type('gpapagapitos');
     cy.get('#password').type('wrong');
