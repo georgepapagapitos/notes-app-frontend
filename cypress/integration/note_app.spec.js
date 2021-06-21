@@ -45,29 +45,28 @@ describe('Note app', function () {
       cy.login({ username: 'gpapagapitos', password: 'password' });
     });
 
+    describe('and several notes exist', function () {
+      beforeEach(function () {
+        cy.createNote({ content: 'first note', important: false })
+        cy.createNote({ content: 'second note', important: false })
+        cy.createNote({ content: 'third note', important: false })
+      });
+
+      it('one of those can be made important', function () {
+        cy.contains('second note')
+          .contains('make important')
+          .click();
+
+        cy.contains('second note')
+          .contains('make not important');
+      });
+    });
+
     it('a new note can be created', function () {
       cy.contains('new note').click();
       cy.get('#note-input').type('a note created by cypress');
       cy.contains('save').click();
       cy.contains('a note created by cypress');
-    });
-
-    describe('and a note exists', function () {
-      beforeEach(function () {
-        cy.createNote({
-          content: 'another note from cypress',
-          important: false
-        });
-      });
-
-      it('it can be made important', function () {
-        cy.contains('another note from cypress')
-          .contains('make important')
-          .click();
-
-        cy.contains('another note from cypress')
-          .contains('make not important');
-      });
     });
   });
 });
